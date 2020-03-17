@@ -4,6 +4,7 @@ session_start();
 include_once("php/code.php");
 
 $user = new Users;
+$work = new Works;
 ?>
 <html lang="fr">
 <head>
@@ -21,5 +22,17 @@ $user = new Users;
         echo "NOT CONNECTED";
     }
         ?></p>
+
+    <br>
+    <?php
+        $allworks = $work->get_works();
+        foreach($allworks as $w)
+        {
+            echo($w["title"]);
+            echo("|");
+            echo($w["description"]);
+        }
+
+    ?>
 </body>
 </html>

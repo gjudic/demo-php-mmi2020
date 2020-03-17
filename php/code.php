@@ -37,4 +37,34 @@ class Users {
         }
     }
 }
+
+class Works {
+    function get_works()
+    {
+        global $db;
+
+        $request = "SELECT * FROM works";
+        $resultat = $db->query($request);
+        $user = $resultat->fetchAll();
+
+        return($user);
+    }
+
+    function create($title, $description)
+    {
+        global $db;
+
+        $request = $db->prepare('INSERT INTO works (title, description) VALUES (?, ?)');
+        $request->execute([$title, $description]);
+    }
+
+    function update($title, $description, $id)
+    {
+        global $db;
+
+        $request = $db->prepare('UPDATE works SET title=?, description=? WHERE id=?');
+        $request->execute([$title, $description, $id]);
+    }
+
+}
 ?>
